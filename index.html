@@ -291,6 +291,7 @@
     .trust-badges { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
     .trust-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text-2); background: var(--bg); border-radius: var(--r-sm); padding: 5px 10px; }
   </style>
+  <script src="config.js"></script>
 </head>
 <body>
 
@@ -399,8 +400,8 @@
               <li>Detailed mark schemes</li>
             </ul>
             <div class="pack-footer">
-              <p class="pack-price"><sup>£</sup>19.50</p>
-              <a href="#" class="btn-buy">Buy now</a>
+              <p class="pack-price"><sup>£</sup>37</p>
+              <a href="#" class="btn-buy" id="btn-foundation">Buy now</a>
             </div>
           </div>
 
@@ -416,8 +417,8 @@
               <li>Detailed mark schemes</li>
             </ul>
             <div class="pack-footer">
-              <p class="pack-price"><sup>£</sup>21.50</p>
-              <a href="#" class="btn-buy">Buy now</a>
+              <p class="pack-price"><sup>£</sup>41</p>
+              <a href="#" class="btn-buy" id="btn-intermediate">Buy now</a>
             </div>
           </div>
 
@@ -433,8 +434,8 @@
               <li>Detailed mark schemes</li>
             </ul>
             <div class="pack-footer">
-              <p class="pack-price"><sup>£</sup>25.00</p>
-              <a href="#" class="btn-buy">Buy now</a>
+              <p class="pack-price"><sup>£</sup>45</p>
+              <a href="#" class="btn-buy" id="btn-advanced">Buy now</a>
             </div>
           </div>
 
@@ -451,8 +452,8 @@
               <li>Detailed mark schemes</li>
             </ul>
             <div class="pack-footer">
-              <p class="pack-price"><sup>£</sup>35.00</p>
-              <a href="#" class="btn-buy">Buy now</a>
+              <p class="pack-price"><sup>£</sup>55</p>
+              <a href="#" class="btn-buy" id="btn-combo">Buy now</a>
             </div>
           </div>
 
@@ -495,7 +496,7 @@
               </div>
               <div class="service-footer">
                 <div>
-                  <p class="service-price"><sup style="font-size:13px;font-weight:500;vertical-align:super">£</sup><!-- UPDATE PRICE -->0.00</p>
+                  <p class="service-price" id="mini-price-display"><sup style="font-size:13px;font-weight:500;vertical-align:super">£</sup>25</p>
                   <p class="service-price-label">fixed price per paper</p>
                 </div>
                 <a href="#" class="btn-order" onclick="event.preventDefault();openOrderForm('mini')">Order &amp; Pay →</a>
@@ -530,9 +531,9 @@
               </ul>
               <div class="assess-footer">
                 <div>
-                  <p class="assess-price"><sup>£</sup>18</p>
+                  <p class="assess-price"><sup>£</sup>20</p>
                   <p class="assess-price-label">4-week bundle · pay once</p>
-                  <p class="assess-per">£2.25 per assessment</p>
+                  <p class="assess-per">£2.50 per assessment</p>
                 </div>
                 <a href="#" class="btn-order" onclick="event.preventDefault();openOrderForm('standard')">Get started →</a>
               </div>
@@ -558,9 +559,9 @@
               </ul>
               <div class="assess-footer">
                 <div>
-                  <p class="assess-price"><sup>£</sup>40</p>
+                  <p class="assess-price"><sup>£</sup>45</p>
                   <p class="assess-price-label">4-week bundle · pay once</p>
-                  <p class="assess-per">£2.00 per assessment</p>
+                  <p class="assess-per">£2.25 per assessment</p>
                 </div>
                 <a href="#" class="btn-order" onclick="event.preventDefault();openOrderForm('premium')">Get started →</a>
               </div>
@@ -876,7 +877,13 @@
 
     // ── ORDER FORM — Stripe Payment Links ─────────────────────────────────────
     // After creating Payment Links in your Stripe dashboard, paste the URLs here:
-    const STRIPE_LINKS = {
+    // Payment links are managed centrally in config.js
+    // Update paymentLink values there — not here
+    const STRIPE_LINKS = (typeof E11CONFIG !== 'undefined') ? {
+      mini:     E11CONFIG.products.find(p=>p.id==='mini-paper')?.paymentLink     || 'REPLACE_WITH_STRIPE_PAYMENT_LINK_MINI_PAPER',
+      standard: E11CONFIG.products.find(p=>p.id==='writing-standard')?.paymentLink || 'REPLACE_WITH_STRIPE_PAYMENT_LINK_STANDARD_18',
+      premium:  E11CONFIG.products.find(p=>p.id==='writing-premium')?.paymentLink  || 'REPLACE_WITH_STRIPE_PAYMENT_LINK_PREMIUM_40'
+    } : {
       mini:     'REPLACE_WITH_STRIPE_PAYMENT_LINK_MINI_PAPER',
       standard: 'REPLACE_WITH_STRIPE_PAYMENT_LINK_STANDARD_18',
       premium:  'REPLACE_WITH_STRIPE_PAYMENT_LINK_PREMIUM_40'
@@ -889,7 +896,7 @@
       mini: {
         icon: '🎯',
         title: 'Curated Mini Practice Paper',
-        price: '<!-- UPDATE PRICE -->',
+        price: '£25',
         colour: '#EAF5F6',
         steps: [
           { icon: '💳', head: 'Pay securely via Stripe', body: 'At checkout you\'ll be asked for: your child\'s year group, two topics (e.g. Maths & Geography), and difficulty level (Foundation / Challenger / Advanced). Name and email are collected by Stripe automatically.' },
@@ -901,10 +908,10 @@
       standard: {
         icon: '✍️',
         title: 'Writing Assessment — Standard',
-        price: '£18',
+        price: '£20',
         colour: '#FFF7ED',
         steps: [
-          { icon: '💳', head: 'Pay £18 via Stripe — 4-week bundle', body: 'At checkout you\'ll be asked for: your child\'s year group, preferred submission method (Email or WhatsApp), and your WhatsApp number if applicable.' },
+          { icon: '💳', head: 'Pay £20 via Stripe — 4-week bundle', body: 'At checkout you\'ll be asked for: your child\'s year group, preferred submission method (Email or WhatsApp), and your WhatsApp number if applicable.' },
           { icon: '✅', head: 'We confirm within 24 hours', body: 'You\'ll receive a confirmation email with our WhatsApp number and email address for submissions, plus your start date.' },
           { icon: '📤', head: 'Submit your child\'s writing', body: 'Send a photo, typed text or document of your child\'s creative or continuous writing — up to 2 times per week. We accept email or WhatsApp.' },
           { icon: '📋', head: 'Receive your assessment', body: 'We return a score, written feedback, and specific improvement areas — typically within a few hours of receiving your submission. Marked against FSCE & CSSE criteria.' }
@@ -913,10 +920,10 @@
       premium: {
         icon: '⚡',
         title: 'Writing Assessment — Premium',
-        price: '£40',
+        price: '£45',
         colour: '#EAF5F6',
         steps: [
-          { icon: '💳', head: 'Pay £40 via Stripe — 4-week bundle', body: 'At checkout you\'ll be asked for: your child\'s year group, preferred submission method (Email or WhatsApp), and your WhatsApp number if applicable.' },
+          { icon: '💳', head: 'Pay £45 via Stripe — 4-week bundle', body: 'At checkout you\'ll be asked for: your child\'s year group, preferred submission method (Email or WhatsApp), and your WhatsApp number if applicable.' },
           { icon: '✅', head: 'We confirm within 24 hours', body: 'You\'ll receive a confirmation email with our WhatsApp number and email address for submissions, plus your start date.' },
           { icon: '📤', head: 'Submit your child\'s writing', body: 'Send a photo, typed text or document of your child\'s creative or continuous writing — up to 5 times per week. We accept email or WhatsApp.' },
           { icon: '📋', head: 'Receive your assessment', body: 'We return a score, written feedback, and specific improvement areas — typically within a few hours of receiving your submission. Marked against FSCE & CSSE criteria.' }
@@ -976,5 +983,33 @@
       if (e.key === 'Escape') { closeModal(); closeOrderForm(); }
     });
   </script>
+
+  <script>
+    // Wire pack buy buttons to config.js payment links
+    // When Payment Links are added to config.js, buttons update automatically
+    (function() {
+      if (typeof E11CONFIG === 'undefined') return;
+      var map = {
+        'btn-foundation':  'foundation',
+        'btn-intermediate':'intermediate',
+        'btn-advanced':    'advanced',
+        'btn-combo':       'combo'
+      };
+      Object.keys(map).forEach(function(btnId) {
+        var btn = document.getElementById(btnId);
+        if (!btn) return;
+        var product = E11CONFIG.products.find(function(p){ return p.id === map[btnId]; });
+        if (product && product.paymentLink && !product.paymentLink.startsWith('REPLACE')) {
+          btn.href = product.paymentLink;
+        } else {
+          btn.onclick = function(e) {
+            e.preventDefault();
+            alert('Payment link coming soon — please check back shortly.');
+          };
+        }
+      });
+    })();
+  </script>
+
 </body>
 </html>
