@@ -4,14 +4,14 @@
 //
 //  TO UPDATE A PRICE:
 //    1. Change price number below
-//    2. Update in Stripe Dashboard
+//    2. Update in your payment dashboard
 //    3. Push to GitHub — done
 //
 //  TO GO LIVE:
-//    1. Change stripeMode to 'live'
-//    2. Replace sandbox stripePriceId values with live ones
-//    3. Replace paymentLink values with live Payment Links
-//    4. Update STRIPE_SECRET_KEY secret in Cloudflare Worker
+//    1. Change payment mode to 'live' when ready
+//    2. Replace sandbox price IDs with live ones
+//    3. Replace paymentLink values with live payment links
+//    4. Update the payment provider secret in Cloudflare Worker
 // ============================================================
 
 const E11CONFIG = {
@@ -36,8 +36,8 @@ const E11CONFIG = {
   },
 
   // ----------------------------------------------------------
-  //  STRIPE
-  //  Switch stripeMode to 'live' when going live
+  //  PAYMENT GATEWAY
+  //  Switch mode to 'live' when going live
   // ----------------------------------------------------------
   stripe: {
     mode: 'sandbox',   // ← change to 'live' when ready
@@ -49,7 +49,7 @@ const E11CONFIG = {
   //  delivery: 'instant' = PDF password-encrypted, auto download
   //  delivery: 'manual'  = GJ delivers by email within 24 hours
   //
-  //  customFields: list of fields collected at Stripe checkout
+  //  customFields: list of fields collected at checkout
   //  (only for manual delivery products)
   // ----------------------------------------------------------
   products: [
@@ -66,7 +66,7 @@ const E11CONFIG = {
       delivery:     'instant',
       customFields: [],
       stripePriceId: 'price_1TjQnVP7sVaFxbJFpjOCY3m7',   // sandbox
-      paymentLink:   'REPLACE_WITH_STRIPE_PAYMENT_LINK',   // ← add after creating in Stripe
+      paymentLink:   'REPLACE_WITH_PAYMENT_LINK',          // add after creating in your payment gateway
     },
     {
       id:           'intermediate',
@@ -81,7 +81,7 @@ const E11CONFIG = {
       delivery:     'instant',
       customFields: [],
       stripePriceId: 'price_1TjQrsP7sVaFxbJFJmbl604m',   // sandbox
-      paymentLink:   'REPLACE_WITH_STRIPE_PAYMENT_LINK',
+      paymentLink:   'REPLACE_WITH_PAYMENT_LINK',
     },
     {
       id:           'advanced',
@@ -96,7 +96,7 @@ const E11CONFIG = {
       delivery:     'instant',
       customFields: [],
       stripePriceId: 'price_1TjQu3P7sVaFxbJFndb20dJr',   // sandbox
-      paymentLink:   'REPLACE_WITH_STRIPE_PAYMENT_LINK',
+      paymentLink:   'REPLACE_WITH_PAYMENT_LINK',
     },
     {
       id:           'combo',
@@ -111,7 +111,7 @@ const E11CONFIG = {
       delivery:     'instant',
       customFields: [],
       stripePriceId: 'price_1TjQySP7sVaFxbJFXnH6CU4M',   // sandbox
-      paymentLink:   'REPLACE_WITH_STRIPE_PAYMENT_LINK',
+      paymentLink:   'REPLACE_WITH_PAYMENT_LINK',
     },
     {
       id:           'mini-paper',
@@ -124,9 +124,9 @@ const E11CONFIG = {
       price:        25.00,
       priceLabel:   '£25',
       delivery:     'manual',
-      customFields: ['Topic 1', 'Topic 2', 'Difficulty Level'],   // collected at Stripe checkout
+      customFields: ['Topic 1', 'Topic 2', 'Difficulty Level'],   // collected at checkout
       stripePriceId: 'price_1TkmMEP7sVaFxbJFl8vlRKB7',          // sandbox
-      paymentLink:   'REPLACE_WITH_STRIPE_PAYMENT_LINK_MINI',     // ← add after creating in Stripe
+      paymentLink:   'REPLACE_WITH_PAYMENT_LINK_MINI',            // add after creating in your payment gateway
     },
     {
       id:           'writing-standard',
@@ -141,7 +141,7 @@ const E11CONFIG = {
       delivery:     'manual',
       customFields: [],
       stripePriceId: 'price_1TkmNBP7sVaFxbJFLmzzaH3o',          // sandbox
-      paymentLink:   'REPLACE_WITH_STRIPE_PAYMENT_LINK_WRITING_STD',
+      paymentLink:   'REPLACE_WITH_PAYMENT_LINK_WRITING_STD',
     },
     {
       id:           'writing-premium',
@@ -156,7 +156,7 @@ const E11CONFIG = {
       delivery:     'manual',
       customFields: [],
       stripePriceId: 'price_1TkmNfP7sVaFxbJFe9PGwZuq',          // sandbox
-      paymentLink:   'REPLACE_WITH_STRIPE_PAYMENT_LINK_WRITING_PREM',
+      paymentLink:   'REPLACE_WITH_PAYMENT_LINK_WRITING_PREM',
     },
   ],
 

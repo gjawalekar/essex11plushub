@@ -224,7 +224,7 @@
       </div>
       <button class="btn-primary" onclick="triggerDownload()">⬇️ &nbsp;Download again</button>
       <div class="item-list">
-        <div class="item"><span>📧</span><span>A receipt has been sent to you by Stripe</span></div>
+        <div class="item"><span>📧</span><span>A payment receipt has been sent to your email address</span></div>
         <div class="item"><span>🔑</span><span>To open: enter the email address you purchased with as the password</span></div>
         <div class="item"><span>❓</span><span>Problems? Email <a href="mailto:essex11plushub@gmail.com">essex11plushub@gmail.com</a></span></div>
       </div>
@@ -243,7 +243,7 @@
       </div>
       <div class="item-list">
         <div class="item"><span>⏰</span><span>Delivery within 24 hours by email</span></div>
-        <div class="item"><span>📧</span><span>A receipt has been sent to you by Stripe</span></div>
+        <div class="item"><span>📧</span><span>A payment receipt has been sent to your email address</span></div>
         <div class="item"><span>❓</span><span>Questions? Email <a href="mailto:essex11plushub@gmail.com">essex11plushub@gmail.com</a></span></div>
       </div>
       <a href="/" class="btn-secondary">← Back to Essex 11 Plus Hub</a>
@@ -265,7 +265,7 @@
         <p class="info-box-text">We'll return your scored assessment within <strong>24 hours</strong>.</p>
       </div>
       <div class="item-list">
-        <div class="item"><span>📧</span><span>A receipt has been sent to you by Stripe</span></div>
+        <div class="item"><span>📧</span><span>A payment receipt has been sent to your email address</span></div>
         <div class="item"><span>📋</span><span>Subject line: <strong id="writing-subject">Writing Assessment — E11P-XXXXXXXX</strong></span></div>
         <div class="item"><span>❓</span><span>Questions? Email <a href="mailto:essex11plushub@gmail.com">essex11plushub@gmail.com</a></span></div>
       </div>
@@ -279,7 +279,7 @@
       <p class="sub" id="error-msg">We couldn't verify your payment. Please contact us and we'll sort it out immediately.</p>
       <div class="item-list">
         <div class="item"><span>📧</span><span>Email: <a href="mailto:essex11plushub@gmail.com">essex11plushub@gmail.com</a></span></div>
-        <div class="item"><span>📋</span><span>Please include your Stripe payment confirmation email</span></div>
+        <div class="item"><span>📋</span><span>Please include your payment confirmation email</span></div>
       </div>
     </div>
 
@@ -302,7 +302,7 @@
   window.addEventListener('DOMContentLoaded', () => {
     sessionId = new URLSearchParams(window.location.search).get('session_id');
     if (!sessionId) {
-      showError('No order session was found. Please return from Stripe checkout or contact us with your Stripe receipt.');
+      showError('No order session was found. Please return from checkout or contact us with your payment receipt.');
       return;
     }
     poll();
@@ -340,7 +340,7 @@
       if (res.status === 202) {
         retries++;
         if (retries >= MAX) {
-          showError('Your order is still being prepared. Please refresh in a moment, or contact us with your Stripe receipt if this message remains.');
+          showError('Your order is still being prepared. Please refresh in a moment, or contact us with your payment receipt if this message remains.');
           return;
         }
         setTimeout(poll, 2000);
@@ -348,7 +348,7 @@
       }
 
       if (res.status === 403) {
-        showError('Payment could not be verified. Please contact us with your Stripe receipt.');
+        showError('Payment could not be verified. Please contact us with your payment receipt.');
         return;
       }
 
