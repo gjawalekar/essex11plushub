@@ -238,8 +238,7 @@
       <div class="info-box">
         <p class="info-box-label">📬 What happens next</p>
         <p class="info-box-text">
-          We'll prepare your personalised mini paper based on your chosen topics and difficulty level.<br><br>
-          <strong>You'll receive it by email within 24 hours.</strong>
+          <strong>We'll prepare your personalised paper and email it within 24 hours.</strong>
         </p>
       </div>
       <div class="item-list">
@@ -258,12 +257,12 @@
       <div class="info-box">
         <p class="info-box-label">📌 Action required — submit your child's writing</p>
         <p class="info-box-text">
-          Email your child's creative or continuous writing to:<br><br>
+          Please email your child's writing to:<br><br>
           <strong><a href="mailto:essex11plushub@gmail.com" style="color:var(--teal-dark);font-size:16px">essex11plushub@gmail.com</a></strong><br><br>
           Include your order reference in the subject line:
         </p>
         <span class="order-ref" id="writing-order-ref">E11P-XXXXXXXX</span>
-        <p class="info-box-text">We'll return your scored assessment within <strong>24 hours</strong> of receiving the writing.</p>
+        <p class="info-box-text">We'll return your scored assessment within <strong>24 hours</strong>.</p>
       </div>
       <div class="item-list">
         <div class="item"><span>📧</span><span>A receipt has been sent to you by Stripe</span></div>
@@ -302,7 +301,10 @@
 
   window.addEventListener('DOMContentLoaded', () => {
     sessionId = new URLSearchParams(window.location.search).get('session_id');
-    if (!sessionId) { show('s-mini'); return; } // No session = direct visit
+    if (!sessionId) {
+      showError('No order session was found. Please return from Stripe checkout or contact us with your Stripe receipt.');
+      return;
+    }
     poll();
   });
 
@@ -324,8 +326,9 @@
         const data = await res.json();
         if (data.status === 'manual') {
           if (data.productType === 'writing') {
-            document.getElementById('writing-order-ref').textContent = data.orderId || 'E11P-XXXXXXXX';
-            document.getElementById('writing-subject').textContent   = `Writing Assessment — ${data.orderId || ''}`;
+            const orderRef = data.orderId || 'E11P-XXXXXXXX';
+            document.getElementById('writing-order-ref').textContent = orderRef;
+            document.getElementById('writing-subject').textContent   = `Writing Assessment — ${orderRef}`;
             show('s-writing');
           } else {
             show('s-mini');
@@ -336,7 +339,10 @@
 
       if (res.status === 202) {
         retries++;
-        if (retries >= MAX) { show('s-mini'); return; } // Fallback after 16s
+        if (retries >= MAX) {
+          showError('Your order is still being prepared. Please refresh in a moment, or contact us with your Stripe receipt if this message remains.');
+          return;
+        }
         setTimeout(poll, 2000);
         return;
       }

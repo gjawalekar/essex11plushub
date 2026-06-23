@@ -55,7 +55,7 @@ const E11CONFIG = {
   products: [
     {
       id:           'foundation',
-      name:         'FSCE Practice Pack — Foundation Level',
+      name:         'FSCE (New Format) Foundation Pack',
       subtitle:     'Set of 5 Papers',
       description:  'Five practice papers matched to the new FSCE format. Ideal for early preparation and building core skills.',
       badge:        'Foundation',
@@ -70,7 +70,7 @@ const E11CONFIG = {
     },
     {
       id:           'intermediate',
-      name:         'FSCE Practice Pack — Intermediate Level',
+      name:         'FSCE (New Format) Challenger Pack',
       subtitle:     'Set of 5 Papers',
       description:  'Five practice papers for developing exam technique and building on foundation skills.',
       badge:        'Intermediate',
@@ -85,7 +85,7 @@ const E11CONFIG = {
     },
     {
       id:           'advanced',
-      name:         'FSCE Practice Pack — Advanced Level',
+      name:         'FSCE (New Format) Advanced Pack',
       subtitle:     'Set of 5 Papers',
       description:  'Five challenging papers for final exam preparation. Matches the highest FSCE difficulty level.',
       badge:        'Advanced',
@@ -100,7 +100,7 @@ const E11CONFIG = {
     },
     {
       id:           'combo',
-      name:         'FSCE Combo Practice Pack',
+      name:         'FSCE (New Format) Combo Pack',
       subtitle:     'Set of 5 Papers — All Levels',
       description:  'The complete preparation pack. Five papers spanning Foundation to Advanced — everything in one purchase.',
       badge:        'Best Value',
@@ -117,7 +117,7 @@ const E11CONFIG = {
       id:           'mini-paper',
       name:         'Curated Mini Practice Paper',
       subtitle:     'On Demand',
-      description:  'A handpicked practice paper tailored to your child\'s current level. Delivered to your email within 24 hours.',
+      description:  'A handpicked 60-question practice paper tailored to your child\'s current level: 30 questions for each selected topic. Delivered to your email within 24 hours.',
       badge:        'On Demand',
       badgeColor:   '#E0F7FA',
       emoji:        '📄',

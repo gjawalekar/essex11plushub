@@ -122,10 +122,10 @@
     /* PRODUCT GROUP LABEL */
     .product-group { margin-bottom: 48px; }
     .product-group + .product-group { margin-top: 56px; }
-    .group-label { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 0.5px solid var(--border); }
+    .group-label { font-size: 15px; font-weight: 700; letter-spacing: .02em; text-transform: uppercase; color: var(--text-1); margin-bottom: 20px; padding: 0 0 13px 14px; border-bottom: 1px solid var(--border); border-left: 4px solid var(--teal); line-height: 1.25; }
 
     /* PACK CARDS (FSCE practice packs) */
-    .packs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+    .packs-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
     .pack-card { background: var(--white); border: 0.5px solid var(--border); border-radius: var(--r-lg); padding: 26px 22px 24px; display: flex; flex-direction: column; position: relative; transition: transform .22s, box-shadow .22s; }
     .pack-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
     .pack-card.coming-soon { opacity: 0.55; cursor: default; pointer-events: none; }
@@ -149,14 +149,14 @@
 
     /* SERVICE CARDS */
     .services-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; }
-    .service-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--r-lg); padding: 30px 28px; display: flex; gap: 20px; align-items: flex-start; transition: transform .22s, box-shadow .22s; }
+    .service-card { background: var(--white); border: 0.5px solid var(--border); border-radius: var(--r-lg); padding: 30px 28px; display: flex; gap: 20px; align-items: flex-start; transition: transform .22s, box-shadow .22s; }
     .service-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
     .service-icon-wrap { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0; }
     .service-body { flex: 1; }
     .service-title { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
     .service-desc { font-size: 13px; color: var(--text-2); line-height: 1.6; margin-bottom: 16px; }
     .service-detail { font-size: 12px; color: var(--text-3); margin-bottom: 16px; display: flex; flex-wrap: wrap; gap: 6px; }
-    .service-detail span { background: var(--white); border: 0.5px solid var(--border); border-radius: 980px; padding: 3px 10px; color: var(--text-2); }
+    .service-detail span { background: var(--bg); border: 0.5px solid var(--border); border-radius: 980px; padding: 3px 10px; color: var(--text-2); }
     .service-footer { display: flex; align-items: center; gap: 12px; }
     .service-price { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; }
     .service-price-label { font-size: 12px; color: var(--text-2); margin-top: 1px; }
@@ -166,7 +166,9 @@
     .btn-order-outline:hover { background: var(--text-1); color: #fff; }
 
     /* ASSESSMENT TIERS */
-    .assessment-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--r-lg); padding: 28px; display: flex; flex-direction: column; }
+    .assessment-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .assessment-card { background: var(--white); border: 0.5px solid var(--border); border-radius: var(--r-lg); padding: 28px; display: flex; flex-direction: column; transition: transform .22s, box-shadow .22s; }
+    .assessment-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
     .assessment-card.featured-tier { border-color: var(--teal-light); background: linear-gradient(160deg, #f0fbfc 0%, var(--white) 60%); position: relative; }
     .assess-header { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 16px; }
     .assess-icon { width: 46px; height: 46px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
@@ -185,7 +187,7 @@
 
     /* SERVICE WIDE CARD (mini paper) */
     .service-wide { grid-column: 1 / -1; }
-    .coming-soon-strip { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--r-lg); padding: 28px 32px; display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-top: 16px; }
+    .coming-soon-strip { background: var(--white); border: 0.5px solid var(--border); border-radius: var(--r-lg); padding: 28px 32px; display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-top: 16px; }
     .cs-left { display: flex; align-items: center; gap: 16px; }
     .cs-pill { background: var(--text-1); color: #fff; font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 980px; letter-spacing: .04em; white-space: nowrap; }
     .cs-text { font-size: 16px; font-weight: 600; }
@@ -290,6 +292,20 @@
     .footer-legal a:hover { color: var(--text-2); }
     .trust-badges { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
     .trust-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text-2); background: var(--bg); border-radius: var(--r-sm); padding: 5px 10px; }
+
+    @media (max-width: 980px) {
+      .packs-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .services-grid, .assessment-grid { grid-template-columns: 1fr; }
+      .coming-soon-strip { align-items: flex-start; }
+    }
+
+    @media (max-width: 640px) {
+      .packs-grid { grid-template-columns: 1fr; }
+      .service-card, .coming-soon-strip { flex-direction: column; }
+      .service-footer, .assess-footer { align-items: flex-start; flex-direction: column; }
+      .cs-left { align-items: flex-start; flex-direction: column; }
+      .btn-order, .btn-buy, .btn-notify { width: 100%; justify-content: center; text-align: center; }
+    }
   </style>
   <script src="config.js"></script>
 </head>
@@ -385,13 +401,13 @@
 
       <!-- FSCE Practice Packs -->
       <div class="product-group">
-        <p class="group-label">FSCE (New Format) Practice Packs</p>
+        <p class="group-label">Practice Paper</p>
         <div class="packs-grid">
 
           <!-- Foundation -->
           <div class="pack-card">
             <span class="pack-badge badge-foundation">Foundation</span>
-            <p class="pack-title">Foundation Pack</p>
+            <p class="pack-title">FSCE (New Format) Foundation Pack</p>
             <p class="pack-tagline">Build confidence early. A gentle introduction to exam-style questions at a manageable pace.</p>
             <ul class="pack-includes">
               <li>5 full practice papers</li>
@@ -408,7 +424,7 @@
           <!-- Challenger -->
           <div class="pack-card">
             <span class="pack-badge badge-intermediate">Challenger</span>
-            <p class="pack-title">Challenger Pack</p>
+            <p class="pack-title">FSCE (New Format) Challenger Pack</p>
             <p class="pack-tagline">Benchmark your child's progress. Challenge and sharpen skills at the right level.</p>
             <ul class="pack-includes">
               <li>5 full practice papers</li>
@@ -425,7 +441,7 @@
           <!-- Advanced -->
           <div class="pack-card">
             <span class="pack-badge badge-advanced">Advanced</span>
-            <p class="pack-title">Advanced Pack</p>
+            <p class="pack-title">FSCE (New Format) Advanced Pack</p>
             <p class="pack-tagline">For high-achievers aiming for the top. Push boundaries with the toughest exam-style questions.</p>
             <ul class="pack-includes">
               <li>5 full practice papers</li>
@@ -443,7 +459,7 @@
           <div class="pack-card featured">
             <span class="best-value-ribbon">Best Value</span>
             <span class="pack-badge badge-combo">All Levels</span>
-            <p class="pack-title">Combo Pack</p>
+            <p class="pack-title">FSCE (New Format) Combo Pack</p>
             <p class="pack-tagline">Not sure where to start? Sample all three levels before committing — the ideal first purchase.</p>
             <ul class="pack-includes">
               <li>5 papers across all levels</li>
@@ -457,23 +473,21 @@
             </div>
           </div>
 
-          <!-- CSSE Coming Soon -->
-          <div class="pack-card coming-soon">
-            <span class="pack-badge" style="background:#F1F5F9;color:var(--text-3);">Coming Soon</span>
-            <p class="pack-title">CSSE Pack</p>
-            <p class="pack-tagline">Colchester & Southend format practice packs — in development now.</p>
-            <ul class="pack-includes">
-              <li>5 full practice papers</li>
-              <li>CSSE exam format</li>
-              <li>Full answer sheets</li>
-              <li>Detailed mark schemes</li>
-            </ul>
-            <div class="pack-footer">
-              <p class="pack-price" style="color:var(--text-3);">TBC</p>
-              <a href="#" class="btn-buy" style="background:var(--text-3);">Notify me</a>
+        </div>
+      </div>
+
+      <!-- CSSE Practice Packs -->
+      <div class="product-group">
+        <p class="group-label">CSSE Practice Paper</p>
+        <div class="coming-soon-strip">
+          <div class="cs-left">
+            <span class="cs-pill">Coming Soon</span>
+            <div>
+              <p class="cs-text">CSSE Practice Pack</p>
+              <p class="cs-sub">Colchester &amp; Southend school format — separate from the FSCE range and currently in development.</p>
             </div>
           </div>
-
+          <a href="#" class="btn-notify">Notify me</a>
         </div>
       </div>
 
@@ -487,12 +501,13 @@
             <div class="service-icon-wrap" style="background:#EAF5F6">🎯</div>
             <div class="service-body">
               <p class="service-title">Curated Mini Practice Paper — On Demand</p>
-              <p class="service-desc">Need to focus on a specific topic? We'll build a tailored mini paper around your child's exact needs. You choose any two topics and one difficulty level — we do the rest.</p>
+              <p class="service-desc">Need to focus on a specific topic? We'll build a tailored mini paper around your child's exact needs. You choose any two topics and one difficulty level — we do the rest. Each mini paper includes 60 practice questions in total, with 30 questions for each chosen topic.</p>
               <div class="service-detail">
+                <span>60 practice questions</span>
+                <span>30 questions per topic</span>
                 <span>Choose any 2 topics</span>
                 <span>1 difficulty level per order</span>
                 <span>Delivered as personalised PDF</span>
-                <span>Any KS2 subject area</span>
               </div>
               <div class="service-footer">
                 <div>
@@ -509,8 +524,8 @@
         <!-- Creative Writing Assessment — separate sub-section -->
         <div id="writing-assessment" style="margin-top:32px;">
           <p class="group-label">Creative &amp; Continuous Writing Assessment</p>
-          <p style="font-size:14px; color:var(--text-2); margin-bottom:20px; line-height:1.6;">Share your child's creative or continuous writing via email or WhatsApp and receive a scored, detailed assessment in minutes — marked against the official FSCE and CSSE marking criteria. Pay for 4 weeks upfront, no ongoing commitment.</p>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+          <p style="font-size:14px; color:var(--text-2); margin-bottom:20px; line-height:1.6;">Email your child's creative or continuous writing and receive a scored, detailed assessment within 24 hours — marked against the official FSCE and CSSE marking criteria. WhatsApp submission is coming soon. Pay for 4 weeks upfront, no ongoing commitment.</p>
+          <div class="assessment-grid">
 
             <!-- Standard -->
             <div class="assessment-card">
@@ -527,7 +542,8 @@
                 <li>8 assessments over 4 weeks</li>
                 <li>Score, written feedback &amp; improvement areas</li>
                 <li>Marked against FSCE &amp; CSSE criteria</li>
-                <li>Results via email or WhatsApp</li>
+                <li>Results by email</li>
+                <li>WhatsApp submission coming soon</li>
               </ul>
               <div class="assess-footer">
                 <div>
@@ -555,7 +571,8 @@
                 <li>20 assessments over 4 weeks</li>
                 <li>Score, written feedback &amp; improvement areas</li>
                 <li>Marked against FSCE &amp; CSSE criteria</li>
-                <li>Results via email or WhatsApp</li>
+                <li>Results by email</li>
+                <li>WhatsApp submission coming soon</li>
               </ul>
               <div class="assess-footer">
                 <div>
@@ -570,16 +587,6 @@
           </div>
         </div>
 
-        <div class="coming-soon-strip">
-          <div class="cs-left">
-            <span class="cs-pill">Coming Soon</span>
-            <div>
-              <p class="cs-text">CSSE Practice Pack</p>
-              <p class="cs-sub">Colchester &amp; Southend school format — register your interest below.</p>
-            </div>
-          </div>
-          <a href="#" class="btn-notify">Notify me</a>
-        </div>
       </div>
 
     </div>
@@ -890,7 +897,7 @@
     };
     // In Stripe dashboard, add these Custom Fields to each Payment Link:
     // Mini Paper:   1) Topics (e.g. Maths & English)  2) Difficulty  3) Year Group
-    // Assessment:   1) Year Group  2) Submission method (Email/WhatsApp)  3) WhatsApp number
+    // Assessment:   1) Year Group
 
     const orderDetails = {
       mini: {
@@ -900,7 +907,7 @@
         colour: '#EAF5F6',
         steps: [
           { icon: '💳', head: 'Pay securely via Stripe', body: 'At checkout you\'ll be asked for: your child\'s year group, two topics (e.g. Maths & Geography), and difficulty level (Foundation / Challenger / Advanced). Name and email are collected by Stripe automatically.' },
-          { icon: '⚙️', head: 'We build your paper', body: 'Once payment is confirmed we create your bespoke paper to your exact brief. This typically takes a few hours during working hours.' },
+          { icon: '⚙️', head: 'We build your paper', body: 'Once payment is confirmed we create your bespoke paper to your exact brief: 60 practice questions in total, with 30 questions for each selected topic.' },
           { icon: '📧', head: 'Delivered by email within 24 hours', body: 'Your password-protected PDF is emailed to the address used at checkout. Open it using your email address as the password.' },
           { icon: '🖨️', head: 'Print and practise', body: 'A4-formatted and ready to print. Essex11Plus Hub watermark appears faintly in the background — this does not affect the questions.' }
         ]
@@ -911,10 +918,10 @@
         price: '£20',
         colour: '#FFF7ED',
         steps: [
-          { icon: '💳', head: 'Pay £20 via Stripe — 4-week bundle', body: 'At checkout you\'ll be asked for: your child\'s year group, preferred submission method (Email or WhatsApp), and your WhatsApp number if applicable.' },
-          { icon: '✅', head: 'We confirm within 24 hours', body: 'You\'ll receive a confirmation email with our WhatsApp number and email address for submissions, plus your start date.' },
-          { icon: '📤', head: 'Submit your child\'s writing', body: 'Send a photo, typed text or document of your child\'s creative or continuous writing — up to 2 times per week. We accept email or WhatsApp.' },
-          { icon: '📋', head: 'Receive your assessment', body: 'We return a score, written feedback, and specific improvement areas — typically within a few hours of receiving your submission. Marked against FSCE & CSSE criteria.' }
+          { icon: '💳', head: 'Pay £20 via Stripe — 4-week bundle', body: 'At checkout you\'ll be asked for your child\'s year group. Name and email are collected by Stripe automatically.' },
+          { icon: '✅', head: 'We confirm within 24 hours', body: 'You\'ll receive a confirmation email with the submission email address and your start date. WhatsApp submission is coming soon.' },
+          { icon: '📤', head: 'Submit your child\'s writing', body: 'Send a photo, typed text or document of your child\'s creative or continuous writing by email — up to 2 times per week.' },
+          { icon: '📋', head: 'Receive your assessment', body: 'We return a score, written feedback, and specific improvement areas within 24 hours of receiving your submission. Marked against FSCE & CSSE criteria.' }
         ]
       },
       premium: {
@@ -923,10 +930,10 @@
         price: '£45',
         colour: '#EAF5F6',
         steps: [
-          { icon: '💳', head: 'Pay £45 via Stripe — 4-week bundle', body: 'At checkout you\'ll be asked for: your child\'s year group, preferred submission method (Email or WhatsApp), and your WhatsApp number if applicable.' },
-          { icon: '✅', head: 'We confirm within 24 hours', body: 'You\'ll receive a confirmation email with our WhatsApp number and email address for submissions, plus your start date.' },
-          { icon: '📤', head: 'Submit your child\'s writing', body: 'Send a photo, typed text or document of your child\'s creative or continuous writing — up to 5 times per week. We accept email or WhatsApp.' },
-          { icon: '📋', head: 'Receive your assessment', body: 'We return a score, written feedback, and specific improvement areas — typically within a few hours of receiving your submission. Marked against FSCE & CSSE criteria.' }
+          { icon: '💳', head: 'Pay £45 via Stripe — 4-week bundle', body: 'At checkout you\'ll be asked for your child\'s year group. Name and email are collected by Stripe automatically.' },
+          { icon: '✅', head: 'We confirm within 24 hours', body: 'You\'ll receive a confirmation email with the submission email address and your start date. WhatsApp submission is coming soon.' },
+          { icon: '📤', head: 'Submit your child\'s writing', body: 'Send a photo, typed text or document of your child\'s creative or continuous writing by email — up to 5 times per week.' },
+          { icon: '📋', head: 'Receive your assessment', body: 'We return a score, written feedback, and specific improvement areas within 24 hours of receiving your submission. Marked against FSCE & CSSE criteria.' }
         ]
       }
     };
