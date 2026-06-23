@@ -223,6 +223,9 @@
     .form-success h3 { font-size:20px;font-weight:700;margin-bottom:8px; }
     .form-success p { font-size:14px;color:var(--text-2);line-height:1.6; }
     .form-error { background:#FEF2F2;border-radius:var(--r-sm);padding:10px 14px;font-size:13px;color:#B91C1C;margin-bottom:14px;display:none; }
+    .form-error.show { display:block; }
+    .checkbox-row { display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--text-2);line-height:1.5;margin-bottom:16px; }
+    .checkbox-row input { margin-top:3px;flex-shrink:0; }
 
     /* SUBJECT TILE MODAL */
     .modal-overlay { position: fixed; inset: 0; background: rgba(16,40,70,0.45); backdrop-filter: blur(6px); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 24px; opacity: 0; pointer-events: none; transition: opacity .25s; }
@@ -487,7 +490,7 @@
               <p class="cs-sub">Colchester &amp; Southend school format — separate from the FSCE range and currently in development.</p>
             </div>
           </div>
-          <a href="#" class="btn-notify">Notify me</a>
+          <a href="#" class="btn-notify" onclick="event.preventDefault();openInterestForm()">Notify me</a>
         </div>
       </div>
 
@@ -625,28 +628,28 @@
     <div class="section-inner">
       <div class="section-hd">
         <p class="eyebrow">Parents &amp; tutors</p>
-        <h2 class="section-h2">Families who've made the grade.</h2>
-        <p class="section-sub">Straight from the parents and tutors using our papers every week.</p>
+        <h2 class="section-h2">Families preparing with confidence.</h2>
+        <p class="section-sub">Feedback from parents and tutors currently using our FSCE-focused practice materials.</p>
       </div>
       <div class="testi-grid">
         <div class="testi-card">
           <p class="testi-stars">★★★★★</p>
-          <p class="testi-text">"My daughter worked through the Foundation and Challenger packs in the six weeks before her test. The format matched the real FSCE papers closely. She passed for CCHS — absolutely thrilled."</p>
+          <p class="testi-text">"The Foundation and Challenger packs are helping my daughter get used to the new FSCE style without feeling overwhelmed. The mix of subjects feels much closer to what we expect on test day."</p>
           <div class="testi-author"><div class="testi-avatar">PS</div><div><p class="testi-name">Priya S.</p><p class="testi-role">Parent &nbsp;·&nbsp; Chelmsford</p></div></div>
         </div>
         <div class="testi-card">
           <p class="testi-stars">★★★★★</p>
-          <p class="testi-text">"I use these with three tutoring students. Instant download, professional layout, and the password protection means papers stay secure and can't be shared around."</p>
+          <p class="testi-text">"I use the packs with my tutoring students because they cover the wider KS2 knowledge children now need for FSCE. The layout is clear, and the mark schemes make review sessions much easier."</p>
           <div class="testi-author"><div class="testi-avatar">JM</div><div><p class="testi-name">James M.</p><p class="testi-role">Private tutor &nbsp;·&nbsp; Brentwood</p></div></div>
         </div>
         <div class="testi-card">
           <p class="testi-stars">★★★★★</p>
-          <p class="testi-text">"The Discovery Paper assessment service is brilliant. My son's creative writing improved noticeably within two weeks of getting proper scored feedback. Worth every penny."</p>
+          <p class="testi-text">"The writing assessment feedback is practical and specific. It has helped my son improve structure, vocabulary and endings rather than just being told to write more."</p>
           <div class="testi-author"><div class="testi-avatar">DR</div><div><p class="testi-name">Deepa R.</p><p class="testi-role">Parent &nbsp;·&nbsp; Southend-on-Sea</p></div></div>
         </div>
         <div class="testi-card">
           <p class="testi-stars">★★★★★</p>
-          <p class="testi-text">"Bought the Combo Pack on a Sunday, had all five papers printed for Monday's session. The breadth of subjects across Adventure and Beacon really prepares them well."</p>
+          <p class="testi-text">"The Combo Pack is useful for spotting whether my child needs Foundation, Challenger or Advanced practice next. It gives us a sensible revision plan instead of guessing."</p>
           <div class="testi-author"><div class="testi-avatar">RK</div><div><p class="testi-name">Rohan K.</p><p class="testi-role">Parent &nbsp;·&nbsp; Colchester</p></div></div>
         </div>
       </div>
@@ -895,9 +898,11 @@
       standard: 'REPLACE_WITH_PAYMENT_LINK_STANDARD',
       premium:  'REPLACE_WITH_PAYMENT_LINK_PREMIUM'
     };
+    const INTEREST_ENDPOINT = (typeof E11CONFIG !== 'undefined')
+      ? (E11CONFIG.worker?.interestEndpoint || `${E11CONFIG.worker?.url || ''}/interest`)
+      : '';
     // In your payment gateway dashboard, add these custom fields to each payment link:
-    // Mini Paper:   1) Topics (e.g. Maths & English)  2) Difficulty  3) Year Group
-    // Assessment:   1) Year Group
+    // Mini Paper:   1) Topics (e.g. Maths & English)  2) Difficulty
 
     const orderDetails = {
       mini: {
@@ -906,10 +911,9 @@
         price: '£25',
         colour: '#EAF5F6',
         steps: [
-          { icon: '💳', head: 'Pay securely', body: 'At checkout you\'ll be asked for: your child\'s year group, two topics (e.g. Maths & Geography), and difficulty level (Foundation / Challenger / Advanced). Name and email are collected securely at checkout.' },
+          { icon: '💳', head: 'Pay securely', body: 'At checkout you\'ll be asked for two topics (e.g. Maths & Geography) and difficulty level (Foundation / Challenger / Advanced). Name and email are collected securely at checkout.' },
           { icon: '⚙️', head: 'We build your paper', body: 'Once payment is confirmed we create your bespoke paper to your exact brief: 60 practice questions in total, with 30 questions for each selected topic.' },
-          { icon: '📧', head: 'Delivered by email within 24 hours', body: 'Your password-protected PDF is emailed to the address used at checkout. Open it using your email address as the password.' },
-          { icon: '🖨️', head: 'Print and practise', body: 'A4-formatted and ready to print. Essex11Plus Hub watermark appears faintly in the background — this does not affect the questions.' }
+          { icon: '📧', head: 'Delivered by email within 24 hours', body: 'Your password-protected PDF is emailed to the address used at checkout.' }
         ]
       },
       standard: {
@@ -918,7 +922,7 @@
         price: '£20',
         colour: '#FFF7ED',
         steps: [
-          { icon: '💳', head: 'Pay £20 securely — 4-week bundle', body: 'At checkout you\'ll be asked for your child\'s year group. Name and email are collected securely at checkout.' },
+          { icon: '💳', head: 'Pay £20 securely — 4-week bundle', body: 'Name and email are collected securely at checkout.' },
           { icon: '✅', head: 'We confirm within 24 hours', body: 'You\'ll receive a confirmation email with the submission email address and your start date. WhatsApp submission is coming soon.' },
           { icon: '📤', head: 'Submit your child\'s writing', body: 'Send a photo, typed text or document of your child\'s creative or continuous writing by email — up to 2 times per week.' },
           { icon: '📋', head: 'Receive your assessment', body: 'We return a score, written feedback, and specific improvement areas within 24 hours of receiving your submission. Marked against FSCE & CSSE criteria.' }
@@ -930,7 +934,7 @@
         price: '£45',
         colour: '#EAF5F6',
         steps: [
-          { icon: '💳', head: 'Pay £45 securely — 4-week bundle', body: 'At checkout you\'ll be asked for your child\'s year group. Name and email are collected securely at checkout.' },
+          { icon: '💳', head: 'Pay £45 securely — 4-week bundle', body: 'Name and email are collected securely at checkout.' },
           { icon: '✅', head: 'We confirm within 24 hours', body: 'You\'ll receive a confirmation email with the submission email address and your start date. WhatsApp submission is coming soon.' },
           { icon: '📤', head: 'Submit your child\'s writing', body: 'Send a photo, typed text or document of your child\'s creative or continuous writing by email — up to 5 times per week.' },
           { icon: '📋', head: 'Receive your assessment', body: 'We return a score, written feedback, and specific improvement areas within 24 hours of receiving your submission. Marked against FSCE & CSSE criteria.' }
@@ -959,22 +963,118 @@
           <button class="modal-close" onclick="closeOrderForm()">✕</button>
         </div>
         <div class="form-modal-body">
-          <p style="font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--teal);margin-bottom:12px;">How it works</p>
-          <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:22px;">
-            ${stepsHtml}
-          </div>
-          <div style="background:var(--teal-soft);border-radius:var(--r-sm);padding:12px 14px;font-size:13px;color:var(--teal-xdark);margin-bottom:18px;">
-            🧾 &nbsp;A receipt is issued automatically after payment.
-          </div>
-          <a href="${PAYMENT_LINKS[type]}" class="btn-submit" style="display:block;text-align:center;text-decoration:none;line-height:1;">
+          <a href="${PAYMENT_LINKS[type]}" class="btn-submit" style="display:block;text-align:center;text-decoration:none;line-height:1;margin-bottom:12px;">
             Proceed to secure payment →
           </a>
+          <div style="background:var(--teal-soft);border-radius:var(--r-sm);padding:10px 14px;font-size:13px;color:var(--teal-xdark);margin-bottom:18px;">
+            🧾 &nbsp;A receipt is issued automatically after payment.
+          </div>
+          <p style="font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--teal);margin-bottom:12px;">How it works</p>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px;">
+            ${stepsHtml}
+          </div>
           <p style="text-align:center;font-size:12px;color:var(--text-3);margin-top:10px;">
             Questions? Email <a href="mailto:essex11plushub@gmail.com" style="color:var(--teal-dark);">essex11plushub@gmail.com</a>
           </p>
         </div>`;
       document.getElementById('orderFormModal').classList.add('open');
       document.body.style.overflow = 'hidden';
+    }
+
+    function openInterestForm() {
+      document.getElementById('orderFormContent').innerHTML = `
+        <div class="form-modal-header">
+          <div>
+            <p class="form-modal-title">CSSE Practice Pack Interest</p>
+            <p class="form-modal-sub">Register your interest and we'll contact you when the CSSE pack is available.</p>
+          </div>
+          <button class="modal-close" onclick="closeOrderForm()">✕</button>
+        </div>
+        <div class="form-modal-body">
+          <div class="form-error" id="interestError"></div>
+          <form id="interestForm" onsubmit="submitInterestForm(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="interestName">Your name <span>*</span></label>
+                <input class="form-control" id="interestName" name="name" autocomplete="name" required>
+              </div>
+              <div class="form-group">
+                <label for="interestEmail">Email address <span>*</span></label>
+                <input class="form-control" id="interestEmail" name="email" type="email" autocomplete="email" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="interestDifficulty">Likely difficulty level</label>
+              <select class="form-control" id="interestDifficulty" name="difficulty">
+                <option value="">Not sure yet</option>
+                <option>Foundation</option>
+                <option>Challenger</option>
+                <option>Advanced</option>
+                <option>Combo pack</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="interestNotes">Anything specific you want covered?</label>
+              <textarea class="form-control" id="interestNotes" name="notes" placeholder="Optional: school target, topic concerns, timing, or format questions"></textarea>
+            </div>
+            <label class="checkbox-row">
+              <input type="checkbox" id="interestConsent" required>
+              <span>I agree to be contacted about the CSSE Practice Pack when it becomes available.</span>
+            </label>
+            <button class="btn-submit" id="interestSubmit" type="submit">Register interest</button>
+            <p style="font-size:12px;color:var(--text-3);line-height:1.5;margin-top:12px;">We only use these details to respond about the CSSE pack. No marketing list.</p>
+          </form>
+        </div>`;
+      document.getElementById('orderFormModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    async function submitInterestForm(event) {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const error = document.getElementById('interestError');
+      const submit = document.getElementById('interestSubmit');
+      error.classList.remove('show');
+      error.textContent = '';
+      submit.disabled = true;
+      submit.textContent = 'Sending...';
+
+      const data = Object.fromEntries(new FormData(form).entries());
+      const payload = {
+        type: 'csse-interest',
+        product: 'CSSE Practice Pack',
+        name: data.name,
+        email: data.email,
+        difficulty: data.difficulty || 'Not sure yet',
+        notes: data.notes,
+        page: window.location.href,
+        createdAt: new Date().toISOString()
+      };
+
+      try {
+        if (!INTEREST_ENDPOINT) throw new Error('Interest endpoint is not configured.');
+        const res = await fetch(INTEREST_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (!res.ok) throw new Error('Interest endpoint returned an error.');
+        document.getElementById('orderFormContent').innerHTML = `
+          <div class="form-success">
+            <span class="success-icon">✓</span>
+            <h3>Thank you for your interest</h3>
+            <p>We've noted your CSSE Practice Pack request and will contact you when it becomes available.</p>
+            <button class="btn-submit" style="margin-top:18px;max-width:220px;" onclick="closeOrderForm()">Close</button>
+          </div>`;
+      } catch (err) {
+        const subject = encodeURIComponent('CSSE Practice Pack interest');
+        const body = encodeURIComponent(`Name: ${payload.name}\nEmail: ${payload.email}\nDifficulty: ${payload.difficulty}\nNotes: ${payload.notes || 'None'}`);
+        error.innerHTML = `We couldn't send this automatically yet. Please email <a href="mailto:essex11plushub@gmail.com?subject=${subject}&body=${body}" style="color:#7F1D1D;text-decoration:underline;">essex11plushub@gmail.com</a>, or try again once the interest endpoint is live.`;
+        error.classList.add('show');
+      } finally {
+        submit.disabled = false;
+        submit.textContent = 'Register interest';
+      }
     }
 
     function closeOrderForm() {
