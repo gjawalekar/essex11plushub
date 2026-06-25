@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../essex11plus-worker"
+		},
+		{
+			"path": "../../11+ papers/FSCE Paper BOT"
 		}
 	],
 	"settings": {}

@@ -222,7 +222,7 @@
           <strong>Password = the email address you used to purchase.</strong>
         </p>
       </div>
-      <button class="btn-primary" onclick="triggerDownload()">⬇️ &nbsp;Download again</button>
+      <button class="btn-primary" onclick="triggerDownload()">⬇️ &nbsp;Download your PDF now</button>
       <div class="item-list">
         <div class="item"><span>📧</span><span>A payment receipt has been sent to your email address</span></div>
         <div class="item"><span>🔑</span><span>To open: enter the email address you purchased with as the password</span></div>
@@ -296,6 +296,7 @@
   const WORKER = 'https://essex11plus-worker.essex11plushub.workers.dev';
   let sessionId   = null;
   let downloadUrl = null;
+  let savedFilename = 'essex11plus-pack.pdf';
   let retries     = 0;
   const MAX       = 8; // 16 seconds
 
@@ -317,7 +318,7 @@
         // Instant download ready
         const blob = await res.blob();
         downloadUrl = URL.createObjectURL(blob);
-        autoDownload(downloadUrl, getFilename(res));
+        savedFilename = getFilename(res);
         show('s-download');
         return;
       }
@@ -362,13 +363,14 @@
   }
 
   function autoDownload(url, name) {
+    if (name) savedFilename = name;
     const a = document.createElement('a');
     a.href = url; a.download = name || 'essex11plus-pack.pdf';
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
   }
 
   function triggerDownload() {
-    if (downloadUrl) autoDownload(downloadUrl, 'essex11plus-pack.pdf');
+    if (downloadUrl) autoDownload(downloadUrl, savedFilename);
   }
 
   function getFilename(res) {
