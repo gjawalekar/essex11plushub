@@ -310,7 +310,7 @@
       .btn-order, .btn-buy, .btn-notify { width: 100%; justify-content: center; text-align: center; }
     }
   </style>
-  <script src="config.js"></script>
+  <script src="config.js?v=20260627-1"></script>
 </head>
 <body>
 
@@ -901,7 +901,10 @@
     }
 
     function getConfiguredPriceLabel(product) {
-      return E11CONFIG.formatPrice(product.price);
+      if (typeof E11CONFIG.formatPrice === 'function') {
+        return E11CONFIG.formatPrice(product.price);
+      }
+      return `£${Number(product.price).toFixed(2).replace(/\.00$/, '')}`;
     }
     const INTEREST_ENDPOINT = (typeof E11CONFIG !== 'undefined')
       ? (E11CONFIG.worker?.interestEndpoint || `${E11CONFIG.worker?.url || ''}/interest`)
