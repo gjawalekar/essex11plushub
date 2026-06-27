@@ -226,7 +226,7 @@
       <div class="item-list">
         <div class="item"><span>📧</span><span>A payment receipt has been sent to your email address</span></div>
         <div class="item"><span>🔑</span><span>To open: enter the email address you purchased with as the password</span></div>
-        <div class="item"><span>❓</span><span>Problems? Email <a href="mailto:essex11plushub@gmail.com">essex11plushub@gmail.com</a></span></div>
+        <div class="item"><span>❓</span><span>Problems? Email <a href="mailto:support@essex11plushub.co.uk">support@essex11plushub.co.uk</a></span></div>
       </div>
     </div>
 
@@ -244,7 +244,7 @@
       <div class="item-list">
         <div class="item"><span>⏰</span><span>Delivery within 24 hours by email</span></div>
         <div class="item"><span>📧</span><span>A payment receipt has been sent to your email address</span></div>
-        <div class="item"><span>❓</span><span>Questions? Email <a href="mailto:essex11plushub@gmail.com">essex11plushub@gmail.com</a></span></div>
+        <div class="item"><span>❓</span><span>Questions? Email <a href="mailto:support@essex11plushub.co.uk">support@essex11plushub.co.uk</a></span></div>
       </div>
       <a href="/" class="btn-secondary">← Back to Essex 11 Plus Hub</a>
     </div>
@@ -258,7 +258,7 @@
         <p class="info-box-label">📌 Action required — submit your child's writing</p>
         <p class="info-box-text">
           Please email your child's writing to:<br><br>
-          <strong><a href="mailto:essex11plushub@gmail.com" style="color:var(--teal-dark);font-size:16px">essex11plushub@gmail.com</a></strong><br><br>
+          <strong><a href="mailto:support@essex11plushub.co.uk" style="color:var(--teal-dark);font-size:16px">support@essex11plushub.co.uk</a></strong><br><br>
           Include your order reference in the subject line:
         </p>
         <span class="order-ref" id="writing-order-ref">E11P-XXXXXXXX</span>
@@ -267,7 +267,7 @@
       <div class="item-list">
         <div class="item"><span>📧</span><span>A payment receipt has been sent to your email address</span></div>
         <div class="item"><span>📋</span><span>Subject line: <strong id="writing-subject">Writing Assessment — E11P-XXXXXXXX</strong></span></div>
-        <div class="item"><span>❓</span><span>Questions? Email <a href="mailto:essex11plushub@gmail.com">essex11plushub@gmail.com</a></span></div>
+        <div class="item"><span>❓</span><span>Questions? Email <a href="mailto:support@essex11plushub.co.uk">support@essex11plushub.co.uk</a></span></div>
       </div>
       <a href="/" class="btn-secondary">← Back to Essex 11 Plus Hub</a>
     </div>
@@ -278,7 +278,7 @@
       <h1>Something went wrong</h1>
       <p class="sub" id="error-msg">We couldn't verify your payment. Please contact us and we'll sort it out immediately.</p>
       <div class="item-list">
-        <div class="item"><span>📧</span><span>Email: <a href="mailto:essex11plushub@gmail.com">essex11plushub@gmail.com</a></span></div>
+        <div class="item"><span>📧</span><span>Email: <a href="mailto:support@essex11plushub.co.uk">support@essex11plushub.co.uk</a></span></div>
         <div class="item"><span>📋</span><span>Please include your payment confirmation email</span></div>
       </div>
     </div>
@@ -350,6 +350,11 @@
 
       if (res.status === 403) {
         showError('Payment could not be verified. Please contact us with your payment receipt.');
+        return;
+      }
+
+      if (res.status === 410) {
+        showError('This order has reached its download limit. Please email support@essex11plushub.co.uk and we\'ll help.');
         return;
       }
 

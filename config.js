@@ -4,14 +4,15 @@
 //
 //  TO UPDATE A PRICE:
 //    1. Change price number below
-//    2. Update in your payment dashboard
+//    2. Update in Stripe Dashboard
 //    3. Push to GitHub — done
 //
 //  TO GO LIVE:
-//    1. Change payment mode to 'live' when ready
-//    2. Replace sandbox price IDs with live ones
-//    3. Replace paymentLink values with live payment links
-//    4. Update the payment provider secret in Cloudflare Worker
+//    1. Change stripeMode to 'live'
+//    2. Replace sandbox stripePriceId values with live ones
+//    3. Replace paymentLink values with live Payment Links
+//    4. Update STRIPE_SECRET_KEY + STRIPE_WEBHOOK_SECRET
+//       secrets in Cloudflare Worker (wrangler secret put)
 // ============================================================
 
 const E11CONFIG = {
@@ -20,11 +21,11 @@ const E11CONFIG = {
   //  BUSINESS DETAILS
   // ----------------------------------------------------------
   business: {
-    name:        'Essex 11 Plus Hub',
-    url:         'https://essex11plushub.co.uk',
-    email:       'essex11plushub@gmail.com',
-    ordersEmail: 'orders@essex11plushub.co.uk',   // Resend sender address
-    tagline:     'Premium 11+ practice papers for Essex grammar school entrance',
+    name:         'Essex 11 Plus Hub',
+    url:          'https://essex11plushub.co.uk',
+    supportEmail: 'support@essex11plushub.co.uk',   // customer-facing: support, writing submissions
+    ordersEmail:  'orders@essex11plushub.co.uk',    // Resend sender address (transactional)
+    tagline:      'Premium 11+ practice papers for Essex grammar school entrance',
   },
 
   // ----------------------------------------------------------
@@ -36,8 +37,8 @@ const E11CONFIG = {
   },
 
   // ----------------------------------------------------------
-  //  PAYMENT GATEWAY
-  //  Switch mode to 'live' when going live
+  //  STRIPE
+  //  Switch stripeMode to 'live' when going live
   // ----------------------------------------------------------
   stripe: {
     mode: 'sandbox',   // ← change to 'live' when ready
@@ -49,84 +50,79 @@ const E11CONFIG = {
   //  delivery: 'instant' = PDF password-encrypted, auto download
   //  delivery: 'manual'  = GJ delivers by email within 24 hours
   //
-  //  customFields: list of fields collected at checkout
+  //  customFields: list of fields collected at Stripe checkout
   //  (only for manual delivery products)
   // ----------------------------------------------------------
   products: [
     {
       id:           'foundation',
-      name:         'FSCE (New Format) Foundation Pack',
+      name:         'FSCE Practice Pack — Foundation Level',
       subtitle:     'Set of 5 Papers',
       description:  'Five practice papers matched to the new FSCE format. Ideal for early preparation and building core skills.',
       badge:        'Foundation',
       badgeColor:   '#E8F5E9',
       emoji:        '📗',
       price:        37.00,
-      priceLabel:   '£37',
       delivery:     'instant',
       customFields: [],
-      stripePriceId: 'price_1TjQnVP7sVaFxbJFpjOCY3m7',   // sandbox
-      paymentLink:   'REPLACE_WITH_PAYMENT_LINK',          // add after creating in your payment gateway
+      stripePriceId: 'price_1TjQnVP7sVaFxbJFpjOCY3m7',   // sandbox — replace with live ID at go-live
+      paymentLink:   'REPLACE_WITH_STRIPE_PAYMENT_LINK',   // ← create in Stripe → copy link here
     },
     {
       id:           'intermediate',
-      name:         'FSCE (New Format) Challenger Pack',
+      name:         'FSCE Practice Pack — Intermediate Level',
       subtitle:     'Set of 5 Papers',
       description:  'Five practice papers for developing exam technique and building on foundation skills.',
       badge:        'Intermediate',
       badgeColor:   '#E3F2FD',
       emoji:        '📘',
       price:        41.00,
-      priceLabel:   '£41',
       delivery:     'instant',
       customFields: [],
       stripePriceId: 'price_1TjQrsP7sVaFxbJFJmbl604m',   // sandbox
-      paymentLink:   'REPLACE_WITH_PAYMENT_LINK',
+      paymentLink:   'REPLACE_WITH_STRIPE_PAYMENT_LINK',
     },
     {
       id:           'advanced',
-      name:         'FSCE (New Format) Advanced Pack',
+      name:         'FSCE Practice Pack — Advanced Level',
       subtitle:     'Set of 5 Papers',
       description:  'Five challenging papers for final exam preparation. Matches the highest FSCE difficulty level.',
       badge:        'Advanced',
       badgeColor:   '#FFF3E0',
       emoji:        '📙',
       price:        45.00,
-      priceLabel:   '£45',
       delivery:     'instant',
       customFields: [],
       stripePriceId: 'price_1TjQu3P7sVaFxbJFndb20dJr',   // sandbox
-      paymentLink:   'REPLACE_WITH_PAYMENT_LINK',
+      paymentLink:   'REPLACE_WITH_STRIPE_PAYMENT_LINK',
     },
     {
       id:           'combo',
-      name:         'FSCE (New Format) Combo Pack',
+      name:         'FSCE Combo Practice Pack',
       subtitle:     'Set of 5 Papers — All Levels',
       description:  'The complete preparation pack. Five papers spanning Foundation to Advanced — everything in one purchase.',
       badge:        'Best Value',
       badgeColor:   '#F3E5F5',
       emoji:        '📦',
       price:        55.00,
-      priceLabel:   '£55',
       delivery:     'instant',
       customFields: [],
       stripePriceId: 'price_1TjQySP7sVaFxbJFXnH6CU4M',   // sandbox
-      paymentLink:   'REPLACE_WITH_PAYMENT_LINK',
+      paymentLink:   'REPLACE_WITH_STRIPE_PAYMENT_LINK',
     },
     {
       id:           'mini-paper',
       name:         'Curated Mini Practice Paper',
       subtitle:     'On Demand',
-      description:  'A handpicked 60-question practice paper tailored to your child\'s current level: 30 questions for each selected topic. Delivered to your email within 24 hours.',
+      description:  'A handpicked practice paper tailored to your child\'s current level. Delivered to your email within 24 hours.',
       badge:        'On Demand',
       badgeColor:   '#E0F7FA',
       emoji:        '📄',
       price:        25.00,
-      priceLabel:   '£25',
       delivery:     'manual',
-      customFields: ['Topic 1', 'Topic 2', 'Difficulty Level'],   // collected at checkout
+      customFields: ['Topic 1', 'Topic 2', 'Difficulty Level'],
       stripePriceId: 'price_1TkmMEP7sVaFxbJFl8vlRKB7',          // sandbox
-      paymentLink:   'REPLACE_WITH_PAYMENT_LINK_MINI',            // add after creating in your payment gateway
+      paymentLink:   'REPLACE_WITH_STRIPE_PAYMENT_LINK_MINI',     // ← create in Stripe → copy link here
     },
     {
       id:           'writing-standard',
@@ -136,12 +132,12 @@ const E11CONFIG = {
       badge:        'Standard',
       badgeColor:   '#E8EAF6',
       emoji:        '✍️',
-      price:        20.00,
-      priceLabel:   '£20',
+      price:        25.00,
       delivery:     'manual',
+      assessmentCount: 8,
       customFields: [],
       stripePriceId: 'price_1TkmNBP7sVaFxbJFLmzzaH3o',          // sandbox
-      paymentLink:   'REPLACE_WITH_PAYMENT_LINK_WRITING_STD',
+      paymentLink:   'REPLACE_WITH_STRIPE_PAYMENT_LINK_WRITING_STD',
     },
     {
       id:           'writing-premium',
@@ -152,11 +148,11 @@ const E11CONFIG = {
       badgeColor:   '#FCE4EC',
       emoji:        '✍️',
       price:        45.00,
-      priceLabel:   '£45',
       delivery:     'manual',
+      assessmentCount: 20,
       customFields: [],
       stripePriceId: 'price_1TkmNfP7sVaFxbJFe9PGwZuq',          // sandbox
-      paymentLink:   'REPLACE_WITH_PAYMENT_LINK_WRITING_PREM',
+      paymentLink:   'REPLACE_WITH_STRIPE_PAYMENT_LINK_WRITING_PREM',
     },
   ],
 
@@ -165,6 +161,9 @@ const E11CONFIG = {
   // ----------------------------------------------------------
   getProductByPriceId(priceId) {
     return this.products.find(p => p.stripePriceId === priceId) || null;
+  },
+  formatPrice(price) {
+    return `£${Number(price).toFixed(2).replace(/\.00$/, '')}`;
   },
   getInstantProducts() {
     return this.products.filter(p => p.delivery === 'instant');
