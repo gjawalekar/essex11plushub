@@ -41,7 +41,7 @@ const E11CONFIG = {
   //  Switch stripeMode to 'live' when going live
   // ----------------------------------------------------------
   stripe: {
-    mode: 'sandbox',   // ← change to 'live' when ready
+    mode: 'live',   // ← change to 'live' when ready
   },
 
   // ----------------------------------------------------------
@@ -62,11 +62,11 @@ const E11CONFIG = {
       badge:        'Foundation',
       badgeColor:   '#E8F5E9',
       emoji:        '📗',
-      price:        37.00,
+      price:        33.00,
       delivery:     'instant',
       customFields: [],
-      stripePriceId: 'price_1TjQnVP7sVaFxbJFpjOCY3m7',   // sandbox — replace with live ID at go-live
-      paymentLink:   'REPLACE_WITH_STRIPE_PAYMENT_LINK',   // ← create in Stripe → copy link here
+      stripePriceId: 'price_1ToWEE07MJnmvxd4KVOTkYUz',   // sandbox — replace with live ID at go-live
+      paymentLink:   'https://buy.stripe.com/bJebIT3Ux9T0blYb0H7Re06',   // ← create in Stripe → copy link here
     },
     {
       id:           'intermediate',
@@ -76,11 +76,11 @@ const E11CONFIG = {
       badge:        'Intermediate',
       badgeColor:   '#E3F2FD',
       emoji:        '📘',
-      price:        41.00,
+      price:        35.00,
       delivery:     'instant',
       customFields: [],
-      stripePriceId: 'price_1TjQrsP7sVaFxbJFJmbl604m',   // sandbox
-      paymentLink:   'REPLACE_WITH_STRIPE_PAYMENT_LINK',
+      stripePriceId: 'price_1ToWFh07MJnmvxd4fEjV7rUp',   // sandbox
+      paymentLink:   'https://buy.stripe.com/5kQcMX3Uxd5cblYecT7Re05',   // ← create in Stripe → copy link here
     },
     {
       id:           'advanced',
@@ -90,11 +90,11 @@ const E11CONFIG = {
       badge:        'Advanced',
       badgeColor:   '#FFF3E0',
       emoji:        '📙',
-      price:        45.00,
+      price:        37.00,
       delivery:     'instant',
       customFields: [],
-      stripePriceId: 'price_1TjQu3P7sVaFxbJFndb20dJr',   // sandbox
-      paymentLink:   'REPLACE_WITH_STRIPE_PAYMENT_LINK',
+      stripePriceId: 'price_1ToWHA07MJnmvxd4G5OnpLsz',   // sandbox
+      paymentLink:   'https://buy.stripe.com/fZu5kv62Fgho3Twb0H7Re04',   // ← create in Stripe → copy link here
     },
     {
       id:           'combo',
@@ -104,11 +104,11 @@ const E11CONFIG = {
       badge:        'Best Value',
       badgeColor:   '#F3E5F5',
       emoji:        '📦',
-      price:        55.00,
+      price:        39.00,
       delivery:     'instant',
       customFields: [],
-      stripePriceId: 'price_1TjQySP7sVaFxbJFXnH6CU4M',   // sandbox
-      paymentLink:   'REPLACE_WITH_STRIPE_PAYMENT_LINK',
+      stripePriceId: 'price_1ToWIS07MJnmvxd4ax48ee7e',   // sandbox
+      paymentLink:   'https://buy.stripe.com/eVq8wHcr3e9gfCeecT7Re03',
     },
     {
       id:           'mini-paper',
@@ -121,8 +121,8 @@ const E11CONFIG = {
       price:        25.00,
       delivery:     'manual',
       customFields: ['Topic 1', 'Topic 2', 'Difficulty Level'],
-      stripePriceId: 'price_1TkmMEP7sVaFxbJFl8vlRKB7',          // sandbox
-      paymentLink:   'REPLACE_WITH_STRIPE_PAYMENT_LINK_MINI',     // ← create in Stripe → copy link here
+      stripePriceId: 'price_1TmJeM07MJnmvxd42EQMjBRf',          // sandbox
+      paymentLink:   'https://buy.stripe.com/aFa4grezb4yGcq20m37Re07',     // ← create in Stripe → copy link here
     },
     {
       id:           'writing-standard',
@@ -136,8 +136,8 @@ const E11CONFIG = {
       delivery:     'manual',
       assessmentCount: 8,
       customFields: [],
-      stripePriceId: 'price_1TkmNBP7sVaFxbJFLmzzaH3o',          // sandbox
-      paymentLink:   'REPLACE_WITH_STRIPE_PAYMENT_LINK_WRITING_STD',
+      stripePriceId: 'price_1TmJe807MJnmvxd4fQXj0my5',          // sandbox
+      paymentLink:   'https://buy.stripe.com/7sYaEP8aNe9gfCe9WD7Re01',
     },
     {
       id:           'writing-premium',
@@ -151,8 +151,8 @@ const E11CONFIG = {
       delivery:     'manual',
       assessmentCount: 20,
       customFields: [],
-      stripePriceId: 'price_1TkmNfP7sVaFxbJFe9PGwZuq',          // sandbox
-      paymentLink:   'REPLACE_WITH_STRIPE_PAYMENT_LINK_WRITING_PREM',
+      stripePriceId: 'price_1TmJdq07MJnmvxd4xorpfp3m',          // sandbox
+      paymentLink:   'https://buy.stripe.com/4gMbITcr32qy61EfgX7Re02',
     },
   ],
 
