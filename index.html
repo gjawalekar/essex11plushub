@@ -79,6 +79,32 @@
     .section-h2 { font-size: clamp(28px, 3.5vw, 44px); font-weight: 700; letter-spacing: -0.022em; line-height: 1.1; margin-bottom: 14px; }
     .section-sub { font-size: 17px; color: var(--text-2); line-height: 1.62; max-width: 500px; }
 
+    /* FREE SAMPLE */
+    .free-sample-card { display: grid; grid-template-columns: auto minmax(0, .9fr) minmax(320px, 1.1fr); align-items: center; gap: 24px; padding: 30px; background: var(--white); border: 1px solid rgba(56,139,147,0.22); border-radius: var(--r-xl); box-shadow: var(--shadow-sm); }
+    .free-sample-icon { width: 68px; height: 68px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border-radius: 18px; background: var(--teal-soft); font-size: 34px; }
+    .free-sample-label { display: inline-block; margin-bottom: 7px; color: var(--teal-dark); font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
+    .free-sample-title { margin-bottom: 5px; font-size: 20px; font-weight: 700; letter-spacing: -0.01em; }
+    .free-sample-desc { color: var(--text-2); font-size: 14px; line-height: 1.6; }
+    .free-sample-meta { margin-top: 8px; color: var(--text-3); font-size: 12px; }
+    .sample-access-form { padding-left: 24px; border-left: 1px solid var(--border); }
+    .sample-form-row { display: grid; grid-template-columns: 1fr 150px; gap: 10px; }
+    .sample-form-group { margin-bottom: 10px; }
+    .sample-form-group label { display: block; margin-bottom: 6px; color: var(--text-1); font-size: 12px; font-weight: 600; }
+    .sample-form-control { width: 100%; min-height: 44px; padding: 10px 12px; border: 1px solid rgba(16,40,70,.16); border-radius: 10px; background: #fff; color: var(--text-1); font: inherit; font-size: 14px; outline: none; transition: border-color .15s, box-shadow .15s; }
+    .sample-form-control:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(56,139,147,.12); }
+    .sample-marketing { display: flex; align-items: flex-start; gap: 8px; margin: 2px 0 12px; color: var(--text-2); font-size: 12px; line-height: 1.45; }
+    .sample-marketing input { margin-top: 2px; accent-color: var(--teal); }
+    .sample-privacy { margin-top: 9px; color: var(--text-3); font-size: 11px; line-height: 1.45; }
+    .sample-privacy a { color: var(--teal-dark); text-decoration: underline; }
+    .sample-form-status { display: none; margin-bottom: 10px; color: #7F1D1D; font-size: 12px; line-height: 1.45; }
+    .sample-form-status.show { display: block; }
+    .sample-honeypot { position: absolute !important; left: -10000px !important; width: 1px !important; height: 1px !important; overflow: hidden !important; }
+    .btn-sample-submit, .btn-download { width: 100%; min-height: 44px; border: 0; cursor: pointer; justify-content: center; }
+    .btn-sample-submit:disabled { cursor: wait; opacity: .7; }
+    .sample-download-ready { display: none; }
+    .sample-download-ready.show { display: block; }
+    .sample-download-ready p { margin-bottom: 10px; color: var(--teal-dark); font-size: 13px; font-weight: 600; text-align: center; }
+
     /* SUBJECT GRID */
     .subject-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
     .subject-card { background: var(--white); border: 0.5px solid var(--border); border-radius: var(--r-lg); padding: 28px 22px; cursor: pointer; transition: transform .24s cubic-bezier(.34,1.56,.64,1), box-shadow .24s; }
@@ -298,6 +324,8 @@
       .services-grid, .assessment-grid { grid-template-columns: 1fr; }
       .coming-soon-strip { align-items: flex-start; }
       .footer-top { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px; }
+      .free-sample-card { grid-template-columns: auto 1fr; }
+      .sample-access-form { grid-column: 1 / -1; padding: 22px 0 0; border-top: 1px solid var(--border); border-left: 0; }
     }
 
     @media (max-width: 640px) {
@@ -332,6 +360,10 @@
       .footer-top { grid-template-columns: 1fr; gap: 28px; }
       .footer-desc { max-width: none; }
       .footer-bottom { align-items: flex-start; flex-direction: column; gap: 14px; }
+      .free-sample-card { grid-template-columns: 1fr; padding: 24px 20px; }
+      .free-sample-icon { width: 58px; height: 58px; font-size: 29px; }
+      .sample-access-form { grid-column: auto; }
+      .sample-form-row { grid-template-columns: 1fr; gap: 0; }
       .form-modal-overlay, .modal-overlay { padding: 12px; }
       .form-modal-header, .modal-header { padding: 22px 20px 0; }
       .form-modal-body, .modal-body { padding-left: 20px; padding-right: 20px; }
@@ -349,6 +381,7 @@
       </a>
       <div class="nav-links">
         <a href="#subjects">Subjects</a>
+        <a href="#free-sample">Free sample</a>
         <a href="#papers">Papers</a>
         <a href="#how">How it works</a>
       </div>
@@ -383,6 +416,59 @@
     <div class="trust-item"><span>🇬🇧</span><span>UK GDPR compliant</span></div>
     <div class="trust-item"><span>🎓</span><span>FSCE new format aligned</span></div>
   </div>
+
+  <section class="section" id="free-sample">
+    <div class="section-inner">
+      <div class="section-hd">
+        <p class="eyebrow">Try before you buy</p>
+        <h2 class="section-h2">A complete lesson,<br>free to download.</h2>
+        <p class="section-sub">Explore the style and quality of our topic lessons with this complimentary Science sample.</p>
+      </div>
+      <article class="free-sample-card">
+        <div class="free-sample-icon" aria-hidden="true">🧬</div>
+        <div>
+          <span class="free-sample-label">Free PDF lesson</span>
+          <h3 class="free-sample-title">Science: Biology — Week 1</h3>
+          <p class="free-sample-desc">A ready-to-use Biology topic lesson for focused learning and practice at home.</p>
+          <p class="free-sample-meta">PDF · 742 KB · No sign-up required</p>
+        </div>
+        <div class="sample-access-form">
+          <form id="sampleLessonForm" onsubmit="submitSampleLesson(event)">
+            <div class="sample-form-row">
+              <div class="sample-form-group">
+                <label for="sampleEmail">Email address</label>
+                <input class="sample-form-control" id="sampleEmail" name="email" type="email" autocomplete="email" placeholder="parent@example.com" required>
+              </div>
+              <div class="sample-form-group">
+                <label for="sampleSchoolYear">Child's year</label>
+                <select class="sample-form-control" id="sampleSchoolYear" name="schoolYear" required>
+                  <option value="">Select</option>
+                  <option>Year 3</option>
+                  <option>Year 4</option>
+                  <option>Year 6</option>
+                </select>
+              </div>
+            </div>
+            <div class="sample-honeypot" aria-hidden="true">
+              <label for="sampleWebsite">Leave this field empty</label>
+              <input id="sampleWebsite" name="website" type="text" tabindex="-1" autocomplete="off">
+            </div>
+            <label class="sample-marketing">
+              <input id="sampleMarketing" name="marketingConsent" type="checkbox">
+              <span>Yes, email me occasional 11+ resources and product updates. Optional.</span>
+            </label>
+            <p class="sample-form-status" id="sampleFormStatus" role="alert"></p>
+            <button class="btn-primary btn-sample-submit" id="sampleSubmit" type="submit">Get the free lesson&nbsp; →</button>
+            <p class="sample-privacy">We use your details to provide this resource and understand interest. Marketing is optional. See our <a href="privacy-policy.html">Privacy Policy</a>.</p>
+          </form>
+          <div class="sample-download-ready" id="sampleDownloadReady" aria-live="polite">
+            <p>Your free lesson is ready.</p>
+            <a class="btn-primary btn-download" href="downloads/week-01-science-biology-lesson.pdf" download="Week_01_Science_Biology_Lesson.pdf">Download free lesson&nbsp; ↓</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
 
   <section class="section section-bg" id="subjects">
     <div class="section-inner">
@@ -682,6 +768,7 @@
         </div>
         <div class="footer-col">
           <h4>Help</h4>
+          <a href="#free-sample">Free sample lesson</a>
           <a href="#how">How it works</a>
           <a href="download-guide.html">Download guide</a>
           <a href="mailto:support@essex11plushub.co.uk">Contact us</a>
@@ -896,6 +983,55 @@
     const INTEREST_ENDPOINT = (typeof E11CONFIG !== 'undefined')
       ? (E11CONFIG.worker?.interestEndpoint || `${E11CONFIG.worker?.url || ''}/interest`)
       : '';
+
+    async function submitSampleLesson(event) {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const submit = document.getElementById('sampleSubmit');
+      const status = document.getElementById('sampleFormStatus');
+      const data = Object.fromEntries(new FormData(form).entries());
+
+      if (data.website) return;
+
+      submit.disabled = true;
+      submit.textContent = 'Preparing lesson...';
+      status.classList.remove('show');
+
+      const payload = {
+        type: 'free-sample-download',
+        product: 'Week 01 Science Biology Lesson',
+        name: 'Free sample visitor',
+        email: data.email,
+        schoolYear: data.schoolYear,
+        difficulty: data.schoolYear,
+        marketingConsent: data.marketingConsent === 'on',
+        notes: data.marketingConsent === 'on'
+          ? 'Marketing consent given.'
+          : 'No marketing consent given.',
+        consentText: data.marketingConsent === 'on'
+          ? 'Email me occasional 11+ resources and product updates.'
+          : 'No marketing consent given.',
+        page: window.location.href,
+        createdAt: new Date().toISOString()
+      };
+
+      try {
+        if (!INTEREST_ENDPOINT) throw new Error('Collection endpoint is not configured.');
+        const response = await fetch(INTEREST_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (!response.ok) throw new Error('Collection endpoint returned an error.');
+      } catch (error) {
+        document.querySelector('#sampleDownloadReady p').textContent = 'We could not save your details just now, but your lesson is still available.';
+      } finally {
+        form.style.display = 'none';
+        document.getElementById('sampleDownloadReady').classList.add('show');
+        submit.disabled = false;
+        submit.textContent = 'Get the free lesson →';
+      }
+    }
     const configuredProduct = id => (typeof E11CONFIG !== 'undefined')
       ? E11CONFIG.products.find(product => product.id === id)
       : null;
