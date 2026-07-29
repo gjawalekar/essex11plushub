@@ -65,7 +65,7 @@ const E11CONFIG = {
       price:        21.00,
       delivery:     'instant',
       customFields: [],
-      stripePriceId: 'price_1TyYiR07MJnmvxd46kROYZyH',
+      stripePriceId: 'price_1TyYih07MJnmvxd4iUCfvAax',
       paymentLink:   'https://buy.stripe.com/fZueV5ezb3uC9dQ1q77Re08',
     },
     {
@@ -79,7 +79,7 @@ const E11CONFIG = {
       price:        21.00,
       delivery:     'instant',
       customFields: [],
-      stripePriceId: 'price_1TyYiX07MJnmvxd4NEZX9444',
+      stripePriceId: 'price_1TyYil07MJnmvxd4436J1dVu',
       paymentLink:   'https://buy.stripe.com/00w28jdv71mucq2fgX7Re09',
     },
     {
